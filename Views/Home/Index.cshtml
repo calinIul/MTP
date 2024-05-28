@@ -1,0 +1,53 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<!-- Jumbotron -->
+<div class="jumbotron text-center">
+    <h1 class="display-4">Welcome to the Tank Management Application!</h1>
+    <p class="lead">Explore detailed information about various tanks with our easy-to-use management system.</p>
+    <hr class="my-4">
+    <p>Click the button below to view our collection of tanks.</p>
+    <a class="btn btn-primary btn-lg" href="@Url.Action("List", "Home")" role="button">View Tanks</a>
+</div>
+
+<!-- Introduction Section -->
+<div class="container my-5">
+    <div class="row">
+        <div class="col-md-6">
+            <img src="@Url.Content("~/images/tank_main.jpg")" class="img-fluid" alt="Tank Image">
+        </div>
+        <div class="col-md-6">
+            <h2>About Our Application</h2>
+            <p>Our Tank Management Application provides a comprehensive database of tanks, complete with images, descriptions, and specifications. Whether you're a military enthusiast, historian, or just curious, our application offers valuable insights into the world of tanks.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Features Section -->
+<div class="container my-5">
+    <div class="row text-center">
+        <div class="col-md-4">
+            <i class="fas fa-database fa-3x mb-3"></i>
+            <h3>Extensive Database</h3>
+            <p>Access a vast collection of tanks with detailed information and images.</p>
+        </div>
+        <div class="col-md-4">
+            <i class="fas fa-search fa-3x mb-3"></i>
+            <h3>Easy Search</h3>
+            <p>Quickly find the tanks you're looking for with our powerful search features.</p>
+        </div>
+        <div class="col-md-4">
+            <i class="fas fa-edit fa-3x mb-3"></i>
+            <h3>Manage Tanks</h3>
+            <p>Add, edit, and delete tank information with ease using our management tools.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Call to Action Section -->
+<div class="jumbotron text-center bg-primary text-white">
+    <h2>Join Our Community</h2>
+    <p>Become a member of our tank enthusiasts community and stay updated with the latest tank information.</p>
+    <a class="btn btn-light btn-lg" href="#" role="button">Sign Up</a>
+</div>

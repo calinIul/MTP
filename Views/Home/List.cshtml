@@ -1,0 +1,27 @@
+@model IEnumerable<ProductManagementApp.Models.Product>
+
+@{
+    ViewData["Title"] = "Tanks";
+}
+
+<div class="container">
+    <div class="row">
+        @foreach (var tank in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="@Url.Content("~/" + tank.ImagePath)" class="card-img-top" alt="@tank.Name">
+                    <div class="card-body">
+                        <h5 class="card-title">@tank.Name</h5>
+                        <p class="card-text">@tank.Description.Substring(0, Math.Min(tank.Description.Length, 100))...</p>
+                        <a href="@Url.Action("Details", "Home", new { id = tank.Id })" class="btn btn-primary">View Details</a>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <a href="@Url.Action("Delete", "Home", new { id = tank.Id })" class="btn btn-danger">Delete</a>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,11 @@
+<!-- Delete.cshtml -->
+@model ProductManagementApp.Models.Product
+
+<h2>Delete Tank</h2>
+
+<p>Are you sure you want to delete the tank <strong>@Model.Name</strong>?</p>
+
+<form asp-action="DeleteConfirmed" method="post">
+    <input type="hidden" asp-for="Id" />
+    <a asp-action="List" class="btn btn-secondary">Cancel</a>
+</form>

@@ -1,0 +1,104 @@
+@model ProductManagementApp.Models.Product
+
+@{
+    ViewData["Title"] = "Add Tank";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Add" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <textarea asp-for="Description" class="form-control"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label>Image</label>
+                <div id="drop-area">
+                    <p>Drag and drop an image file here or click to select one</p>
+                    <input type="file" id="fileElem" onchange="handleFiles(this.files)" asp-for="ImagePath" style="display:none;">
+                </div>
+                <div id="gallery"></div>
+                <span asp-validation-for="ImagePath" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Add Tank</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        let dropArea = document.getElementById('drop-area');
+        let fileInput = document.getElementById('fileElem');
+        let gallery = document.getElementById('gallery');
+
+        dropArea.addEventListener('dragover', (event) => {
+            event.preventDefault();
+            dropArea.classList.add('highlight');
+        });
+
+        dropArea.addEventListener('dragleave', () => {
+            dropArea.classList.remove('highlight');
+        });
+
+        dropArea.addEventListener('drop', (event) => {
+            event.preventDefault();
+            dropArea.classList.remove('highlight');
+            let files = event.dataTransfer.files;
+            handleFiles(files);
+        });
+
+        dropArea.addEventListener('click', () => {
+            fileInput.click();
+        });
+
+        function handleFiles(files) {
+            fileInput.files = files;
+            for (let i = 0; i < files.length; i++) {
+                let file = files[i];
+                let img = document.createElement('img');
+                img.classList.add('obj');
+                img.file = file;
+                gallery.appendChild(img);
+
+                let reader = new FileReader();
+                reader.onload = ((aImg) => { return (e) => { aImg.src = e.target.result; }; })(img);
+                reader.readAsDataURL(file);
+            }
+        }
+    </script>
+    <style>
+        #drop-area {
+            border: 2px dashed #ccc;
+            border-radius: 20px;
+            width: 100%;
+            height: 200px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+        }
+        #drop-area.highlight {
+            border-color: purple;
+        }
+        #gallery img {
+            width: 150px;
+            height: 150px;
+            margin: 10px;
+        }
+    </style>
+}
